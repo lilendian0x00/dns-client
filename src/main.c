@@ -26,8 +26,12 @@ int main(int argc, char* argv[]) {
     p = strtok(NULL, ":");
     if (p) {
         DNS_SERVER_PORT = atoi(p);
+        if (DNS_SERVER_PORT > 65535) {
+            fprintf(stderr, "Entered DNS SERVER PORT must be: 0 < X < 65535\n");
+            exit(1);
+        }
     } else {
-        fprintf(stderr, "DNS SERVER PORT is Invalid! format: <IP:PORT>\n", argv[2]);
+        fprintf(stderr, "Entered DNS SERVER PORT: [%s] is not a integer! format: <IP:PORT> Ex: 1.1.1.1:53\n", argv[2]);
         exit(1);
     }
 
